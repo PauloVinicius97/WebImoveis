@@ -1,0 +1,91 @@
+﻿@page
+@model WebImoveis.WebApp.Pages.Properties.PropertyCreateModel
+
+@{
+    ViewData["Title"] = "Adicionar propriedades";
+}
+
+<h1>Adicionar endereços e propriedades</h1>
+
+<h4>Propriedade</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-page-handler="BtnAddProperty">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Nome</label>
+                <input asp-for="Property.Name" class="form-control" />
+                <span asp-validation-for="Property.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Descrição</label>
+                <input asp-for="Property.Description" class="form-control" />
+                <span asp-validation-for="Property.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Preço</label>
+                <input asp-for="Property.Price" class="form-control" />
+                <span asp-validation-for="Property.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Número</label>
+                <input asp-for="Property.Number" class="form-control" />
+                <span asp-validation-for="Property.Number" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">CEP</label>
+                <select asp-for="Property.AddressId" class="form-control" asp-items="ViewBag.AddressId"></select>
+            </div>
+            <div class="form-group" BtnAddProperty>
+                <input type="submit" value="Adicionar propriedade" class="btn btn-primary" />
+            </div>
+        </form>
+
+        <h4>Endereço</h4>
+        <hr />
+
+        <form method="post" asp-page-handler="BtnGetCepData">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Address.Cep" class="control-label"></label>
+                <input asp-for="Address.Cep" class="form-control" />
+                <span asp-validation-for="Address.Cep" class="text-danger"></span>
+                <div class="form-group">
+                    <br />
+                    <input type="submit" value="Pegar endereço" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+        <span class="form-group">@ViewData["mensagem"]</span>
+        <form method="post" asp-page-handler="BtnSaveCepData">
+            <div class="form-group">
+                <label class="control-label">Rua</label>
+                <input class="form-control" value="@ViewData["rua"]" disabled />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Bairro</label>
+                <input class="form-control" value="@ViewData["bairro"]" disabled />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Cidade</label>
+                <input class="form-control" value="@ViewData["cidade"]" disabled />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Estado</label>
+                <input class="form-control" value="@ViewData["uf"]" disabled />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar CEP" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="PropertyList">Voltar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,55 @@
+﻿@page
+@model WebImoveis.WebApp.Pages.Properties.EditModel
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<h1>Editar</h1>
+
+<h4>Properiedade</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Property.PropertyId" />
+            <div class="form-group">
+                <label asp-for="Property.Name" class="control-label"></label>
+                <input asp-for="Property.Name" class="form-control" />
+                <span asp-validation-for="Property.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Property.Description" class="control-label"></label>
+                <input asp-for="Property.Description" class="form-control" />
+                <span asp-validation-for="Property.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Property.Price" class="control-label"></label>
+                <input asp-for="Property.Price" class="form-control" />
+                <span asp-validation-for="Property.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Property.Number" class="control-label"></label>
+                <input asp-for="Property.Number" class="form-control" disabled />
+                <span asp-validation-for="Property.Number" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Property.AddressId" class="control-label"></label>
+                <select asp-for="Property.AddressId" class="form-control" asp-items="ViewBag.AddressId" disabled></select>
+                <span asp-validation-for="Property.AddressId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./PropertyList">Voltar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
